@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KhukuBank of India - Personal Information</title>
+  <style>
+  :root {
+            --primary-color: #007bff;
+            --gradient: linear-gradient(135deg, #007bff, #00c6ff);
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --border-color: #e0e0e0;
+            --error-color: #e74c3c;
+            --salaried-color: #3498db;
+            --self-employed-color: #9b59b6;
+            --government-color: #2ecc71;
+            --retired-color: #e67e22;
+            --student-color: #1abc9c;
+            --unemployed-color: #95a5a6;
+            --primary: #1a4f8c;
+            --primary-light: #2c6cb0;
+            --secondary: #f8f9fa;
+            --accent: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --text: #333;
+            --text-light: #6c757d;
+            --border: #dee2e6;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background:  #f8f9fa;
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #0d3b66 100%);
+        color: white;
+        box-shadow: var(--shadow);
+        padding: 15px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+        
+    .logo-icon {
+        background-color: white;
+        color: var(--primary);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+        margin: 30px 0;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    .progress-bar::before {
+        content: '';
+        position: absolute;
+        top: 15px;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: var(--border);
+        z-index: 1;
+      }
+
+      .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 20%;
+            height: 4px;
+            background-color: var(--accent);
+            z-index: 2;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+        }
+        
+        .step-number {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: white;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-step.active .step-number {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+    .step-label {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .progress-step.active .step-label {
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    /* Form Card */
+    .application-form {
+      background: white;
+      padding: 40px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 50px;
+    }
+
+    .form-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      border-bottom: 2px solid var(--accent-light);
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .form-group {
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e8e8e8;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: 0.3s;
+      background-color: #fafafa;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      background-color: white;
+      box-shadow: 0 0 0 4px rgba(44,85,48,0.1);
+    }
+
+    .btn {
+            padding: 12px 25px;
+            border: 1px solid black;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color:green;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: rgb(0, 0, 0);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color:rgb(12, 69, 239)
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+    footer {
+      background: linear-gradient(135deg, var(--primary) 0%, #0d3b66 100%);
+      color: white;
+      padding: 50px 0 25px;
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 300px;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+    }
+
+  
+
+    .footer-section ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .footer-section li {
+      margin: 8px 0;
+    }
+
+    .footer-section a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+    }
+
+    .footer-section a:hover {
+      color: white;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        flex-direction: column;
+      }
+
+      .form-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-content">
+      <div class="logo">
+        <div class="logo-icon">₹</div>
+        <span>KhukuBank of India</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="progress-bar">
+      <div class="progress-step active">
+        <div class="step-number">1</div>
+        <div class="step-label">Personal Info</div>
+      </div>
+      <div class="progress-step"><div class="step-number">2</div><div class="step-label">Financial Details</div></div>
+      <div class="progress-step"><div class="step-number">3</div><div class="step-label">Loan Details</div></div>
+      <div class="progress-step"><div class="step-number">4</div><div class="step-label">Review & Submit</div></div>
+    </div>
+
+    <div class="application-form">
+      <h2 class="form-title">Personal Loan Application</h2>
+      <form id="loan-form" action="/api/save-personal-info" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="full_name">Full Name *</label>
+            <input type="text" id="full_name" name="full_name" placeholder="Enter your full name" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" name="phone" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="date" name="dob" required>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="state" class="required">State / Union Territory</label>
+                <select id="state" name="state">
+                    <option value="">Select your state</option>
+                    <!-- Indian states and union territories -->
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <!-- Union Territories -->
+                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                    <option value="Ladakh">Ladakh</option>
+                    <option value="Lakshadweep">Lakshadweep</option>
+                    <option value="Puducherry">Puducherry</option>
+                </select>
+                
+            </div>
+          <div class="form-group">
+            <label>District</label>
+            <select id="district" name="district" required>
+              <option value="">Select District</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" name="city" required>
+          </div>
+          <div class="form-group">
+            <label>PIN Code</label>
+            <input type="text" name="pin" pattern="[0-9]{6}" maxlength="6" required>
+          </div>
+        </div>
+        <!-- AI Required Fields START -->
+<div class="form-row">
+  <div class="form-group">
+    <label for="dependents">Number of Dependents *</label>
+    <select id="dependents" name="dependents" required>
+      <option value="">Select</option>
+      <option value="0">0 (None)</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4+</option>
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label for="education">Education Level *</label>
+    <select id="education" name="education" required>
+      <option value="">Select</option>
+      <option value="1">Graduate</option>
+      <option value="0">Not Graduate</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="credit_score">CIBIL Credit Score (300-900) *</label>
+  <input type="number" id="credit_score" name="credit_score" 
+         min="300" max="900" step="1" 
+         placeholder="Enter 300-900" required>
+  <div class="form-hint">Enter your credit score for AI analysis</div>
+</div>
+<!-- AI Required Fields END -->
+
+      <div class="form-actions" >
+        <button type="submit" class="btn btn-primary">Next: Financial Details ➜</button>
+        <a href="/apply" class="btn btn-outline"><b>Back</b></a>
+      </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h3>KhukuBank of India</h3>
+        <p>Your trusted banking partner with AI power of service.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <ul>
+          <li>📞 8436685689</li>
+          <li>✉️ sudiptajana11111@gmail.com</li>
+          <li>🏢 Kolkata,Barasat</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2025 KhukuBank India. All Rights Reserved.
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    
+      /* ===============================
+         STATE → DISTRICT DATA
+      ================================ */
+      const districtData = {
+        "Andhra Pradesh": ["Anakapalli","Anantapur","Annamayya","Bapatla","Chittoor","Dr. B.R. Ambedkar Konaseema","East Godavari","Eluru","Guntur","Kadapa","Kakinada","Krishna","Kurnool","Nandyal","NTR","Palnadu","Parvathipuram Manyam","Prakasam","SPS Nellore","Sri Sathya Sai","Srikakulam","Tirupati","Visakhapatnam","Vizianagaram","West Godavari"],
+        "Arunachal Pradesh": ["Anjaw","Changlang","Dibang Valley","East Kameng","East Siang","Kamle","Kra Daadi","Kurung Kumey","Lepa Rada","Lohit","Longding","Lower Dibang Valley","Lower Siang","Lower Subansiri","Namsai","Pakke Kessang","Papum Pare","Shi Yomi","Siang","Tawang","Tirap","Upper Siang","Upper Subansiri","West Kameng","West Siang"],
+        "Assam": ["Baksa","Barpeta","Biswanath","Bongaigaon","Cachar","Charaideo","Chirang","Darrang","Dhemaji","Dhubri","Dibrugarh","Goalpara","Golaghat","Hailakandi","Hojai","Jorhat","Kamrup","Kamrup Metropolitan","Karbi Anglong","Karimganj","Kokrajhar","Lakhimpur","Majuli","Morigaon","Nagaon","Nalbari","Sivasagar","Sonitpur","South Salmara","Tinsukia","Udalguri","West Karbi Anglong"],
+        "Bihar": ["Araria","Arwal","Aurangabad","Banka","Begusarai","Bhagalpur","Bhojpur","Buxar","Darbhanga","East Champaran","Gaya","Gopalganj","Jamui","Jehanabad","Kaimur","Katihar","Khagaria","Kishanganj","Lakhisarai","Madhepura","Madhubani","Munger","Muzaffarpur","Nalanda","Nawada","Patna","Purnia","Rohtas","Saharsa","Samastipur","Saran","Sheikhpura","Sheohar","Sitamarhi","Siwan","Supaul","Vaishali","West Champaran"],
+        "Chhattisgarh": ["Balod","Baloda Bazar","Balrampur","Bastar","Bemetara","Bijapur","Bilaspur","Dantewada","Dhamtari","Durg","Gariaband","Gaurela-Pendra-Marwahi","Janjgir-Champa","Jashpur","Kabirdham","Kanker","Kondagaon","Korba","Mahasamund","Manendragarh-Chirmiri-Bharatpur","Mohla-Manpur","Mungeli","Narayanpur","Raigarh","Raipur","Rajnandgaon","Sarangarh-Bilaigarh","Sukma","Surajpur","Surguja"],
+        "Goa": ["North Goa","South Goa"],
+        "Gujarat": ["Ahmedabad","Amreli","Anand","Aravalli","Banaskantha","Bharuch","Bhavnagar","Botad","Chhota Udaipur","Dahod","Dang","Devbhoomi Dwarka","Gandhinagar","Gir Somnath","Jamnagar","Junagadh","Kheda","Kutch","Mahisagar","Mehsana","Morbi","Narmada","Navsari","Panchmahal","Patan","Porbandar","Rajkot","Sabarkantha","Surat","Surendranagar","Tapi","Vadodara","Valsad"],
+        "Haryana": ["Ambala","Bhiwani","Charkhi Dadri","Faridabad","Fatehabad","Gurugram","Hisar","Jhajjar","Jind","Kaithal","Karnal","Kurukshetra","Mahendragarh","Nuh","Palwal","Panchkula","Panipat","Rewari","Rohtak","Sirsa","Sonipat","Yamunanagar"],
+        "Himachal Pradesh": ["Bilaspur","Chamba","Hamirpur","Kangra","Kinnaur","Kullu","Lahaul and Spiti","Mandi","Shimla","Sirmaur","Solan","Una"],
+        "Jharkhand": ["Bokaro","Chatra","Deoghar","Dhanbad","Dumka","East Singhbhum","Garhwa","Giridih","Godda","Gumla","Hazaribagh","Jamtara","Khunti","Koderma","Latehar","Lohardaga","Pakur","Palamu","Ramgarh","Ranchi","Sahebganj","Seraikela Kharsawan","Simdega","West Singhbhum"],
+        "Karnataka": ["Bagalkot","Ballari","Belagavi","Bengaluru Rural","Bengaluru Urban","Bidar","Chamarajanagar","Chikkaballapur","Chikkamagaluru","Chitradurga","Dakshina Kannada","Davanagere","Dharwad","Gadag","Hassan","Haveri","Kalaburagi","Kodagu","Kolar","Koppal","Mandya","Mysuru","Raichur","Ramanagara","Shivamogga","Tumakuru","Udupi","Uttara Kannada","Vijayanagara","Yadgir"],
+        "Kerala": ["Alappuzha","Ernakulam","Idukki","Kannur","Kasaragod","Kollam","Kottayam","Kozhikode","Malappuram","Palakkad","Pathanamthitta","Thiruvananthapuram","Thrissur","Wayanad"],
+        "Maharashtra": ["Ahmednagar","Akola","Amravati","Aurangabad","Beed","Bhandara","Buldhana","Chandrapur","Dhule","Gadchiroli","Gondia","Hingoli","Jalgaon","Jalna","Kolhapur","Latur","Mumbai City","Mumbai Suburban","Nagpur","Nanded","Nandurbar","Nashik","Osmanabad","Palghar","Parbhani","Pune","Raigad","Ratnagiri","Sangli","Satara","Sindhudurg","Solapur","Thane","Wardha","Washim","Yavatmal"],
+        "Tamil Nadu": ["Ariyalur","Chengalpattu","Chennai","Coimbatore","Cuddalore","Dharmapuri","Dindigul","Erode","Kallakurichi","Kanchipuram","Kanyakumari","Karur","Krishnagiri","Madurai","Mayiladuthurai","Nagapattinam","Namakkal","Nilgiris","Perambalur","Pudukkottai","Ramanathapuram","Ranipet","Salem","Sivaganga","Tenkasi","Thanjavur","Theni","Thoothukudi","Tiruchirappalli","Tirunelveli","Tirupattur","Tiruppur","Tiruvallur","Tiruvannamalai","Tiruvarur","Vellore","Viluppuram","Virudhunagar"],
+        "West Bengal": ["Alipurduar","Bankura","Birbhum","Cooch Behar","Dakshin Dinajpur","Darjeeling","Hooghly","Howrah","Jalpaiguri","Jhargram","Kalimpong","Kolkata","Malda","Murshidabad","Nadia","North 24 Parganas","Paschim Bardhaman","Paschim Medinipur","Purba Bardhaman","Purba Medinipur","Purulia","South 24 Parganas","Uttar Dinajpur"]
+      };
+    
+      /* ===============================
+         STATE → DISTRICT CHANGE
+      ================================ */
+      const stateEl = document.getElementById("state");
+      const districtEl = document.getElementById("district");
+    
+      if (stateEl && districtEl) {
+        stateEl.addEventListener("change", function () {
+          districtEl.innerHTML = '<option value="">Select District</option>';
+    
+          const districts = districtData[this.value];
+    
+          if (districts) {
+            districts.forEach(d => {
+              const option = document.createElement("option");
+              option.value = d;
+              option.textContent = d;
+              districtEl.appendChild(option);
+            });
+          }
+        });
+      }
+    
+      /* ===============================
+         FORM SUBMIT → FLASK API
+      ================================ */
+      const form = document.getElementById("loan-form");
+    
+      if (form) {
+        form.addEventListener("submit", async function (event) {
+          event.preventDefault();
+    
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData.entries());
+    
+          try {
+            const response = await fetch('/api/save-personal-info', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data),
+            });
+    
+            let result;
+            try {
+              result = await response.json();
+            } catch {
+              throw new Error("Invalid JSON response from server");
+            }
+    
+            if (response.ok && result.success) {
+              window.location.href = result.next_step;
+            } else {
+              alert(result.message || "Error saving data");
+            }
+    
+          } catch (error) {
+            console.error(error);
+            alert("Server error. Please try again.");
+          }
+        });
+      }
+    
+    });
+    </script>
+    
+    
+
+</body>
+</html>

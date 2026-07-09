@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review & Submit | KhukuBank India - AI Powered Loan Approval</title>
+    <style>
+        :root {
+            --primary: #1a4f8c;
+            --primary-light: #2c6cb0;
+            --secondary: #f8f9fa;
+            --accent: #28a745;
+            --accent-light: #34ce57;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --text: #333;
+            --text-light: #6c757d;
+            --border: #dee2e6;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --ai-processing: #17a2b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d3b66 100%);
+            color: white;
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .logo-icon {
+            background-color: white;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            margin: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--border);
+            z-index: 1;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--accent);
+            z-index: 2;
+        }
+        
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+        }
+        
+        .step-number {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 900;
+        }
+        
+        .application-form {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .form-title {
+            margin-bottom: 25px;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-title i {
+            color: var(--accent);
+        }
+        
+        /* Review Sections */
+        .review-section {
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .review-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .review-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .edit-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .edit-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .review-content {
+            padding: 20px;
+        }
+        
+        .review-row {
+            display: flex;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .review-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .review-label {
+            font-weight: 600;
+            width: 200px;
+            color: var(--text-light);
+        }
+        
+        .review-value {
+            flex: 1;
+        }
+        
+        /* AI Approval Section */
+        .ai-approval-section {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f4ff 100%);
+            border: 1px solid #cce5ff;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .ai-icon {
+            font-size: 3rem;
+            color: var(--ai-processing);
+            margin-bottom: 15px;
+        }
+        
+        .ai-status {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .ai-description {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .progress-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .progress-bar-ai {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--ai-processing), var(--primary));
+            width: 0%;
+            transition: width 2s ease-in-out;
+            border-radius: 4px;
+        }
+        
+        .ai-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .ai-feature {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .ai-feature i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        /* Terms and Conditions */
+        .terms-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .terms-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .terms-content {
+            max-height: 150px;
+            overflow-y: auto;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .checkbox-group input {
+            margin-top: 3px;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent-light);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: rgb(0, 0, 0);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color:rgb(12, 69, 239)
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d3b66 100%);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            gap: 100px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .review-row {
+                flex-direction: column;
+            }
+            
+            .review-label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .ai-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                gap: 30px;
+            }
+        }
+        
+        /* AI Processing Animation */
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .success-message {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .success-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+        
+        .loading i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">₹</div>
+                    <span>KhukuBank India</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="progress-bar">
+            <div class="progress-step">
+                <div class="step-number">1</div>
+                <div class="step-label">Personal Info</div>
+            </div>
+            <div class="progress-step">
+                <div class="step-number">2</div>
+                <div class="step-label">Financial Details</div>
+            </div>
+            <div class="progress-step">
+                <div class="step-number">3</div>
+                <div class="step-label">Loan Details</div>
+            </div>
+            <div class="progress-step">
+                <div class="step-number">4</div>
+                <div class="step-label">Review & Submit</div>
+            </div>
+        </div>
+    
+        <div class="application-form">
+            <h2 class="form-title"><i class="fas fa-file-alt"></i> Review Your Application</h2>
+    
+            <div id="loading" class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading your application data...</p>
+            </div>
+    
+            <form id="review-submit-form" class="hidden">
+                <!-- Personal Information Review -->
+                <div class="review-section">
+                    <div class="review-header">
+                        <h3><i class="fas fa-user"></i> Personal Information</h3>
+                        <button type="button" class="edit-btn" onclick="editSection('personal')">Edit</button>
+                    </div>
+                    <div class="review-content">
+                        <div class="review-row">
+                            <div class="review-label">Full Name</div>
+                            <div class="review-value" id="personal-full_name">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Date of Birth</div>
+                            <div class="review-value" id="personal-dob">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Email</div>
+                            <div class="review-value" id="personal-email">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Phone</div>
+                            <div class="review-value" id="personal-phone">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Address</div>
+                            <div class="review-value" id="personal-address">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Education</div>
+                            <div class="review-value" id="personal-education">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Dependents</div>
+                            <div class="review-value" id="personal-dependents">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Credit Score</div>
+                            <div class="review-value" id="personal-credit_score">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Financial Information Review -->
+                <div class="review-section">
+                    <div class="review-header">
+                        <h3><i class="fas fa-chart-line"></i> Financial Information</h3>
+                        <button type="button" class="edit-btn" onclick="editSection('financial')">Edit</button>
+                    </div>
+                    <div class="review-content">
+                        <div class="review-row">
+                            <div class="review-label">Employment Type</div>
+                            <div class="review-value" id="financial-employmentStatus">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Employer/Business</div>
+                            <div class="review-value" id="financial-employer">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Annual Income</div>
+                            <div class="review-value" id="financial-grossIncome">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Additional Income</div>
+                            <div class="review-value" id="financial-additionalIncome">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Total Income</div>
+                            <div class="review-value" id="financial-totalIncome">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Savings Balance</div>
+                            <div class="review-value" id="financial-savingsBalance">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Fixed Deposits</div>
+                            <div class="review-value" id="financial-fixedDeposits">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Total Liabilities</div>
+                            <div class="review-value" id="financial-totalDebt">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Loan Details Review -->
+                <div class="review-section">
+                    <div class="review-header">
+                        <h3><i class="fas fa-hand-holding-usd"></i> Loan Details</h3>
+                        <button type="button" class="edit-btn" onclick="editSection('loan')">Edit</button>
+                    </div>
+                    <div class="review-content">
+                        <div class="review-row">
+                            <div class="review-label">Loan Type</div>
+                            <div class="review-value" id="loan-loanType">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Loan Amount</div>
+                            <div class="review-value" id="loan-loanAmount">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Loan Tenure</div>
+                            <div class="review-value" id="loan-loanTerm">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Interest Rate</div>
+                            <div class="review-value" id="loan-interestRate">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Loan Purpose</div>
+                            <div class="review-value" id="loan-loanPurpose">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Monthly EMI</div>
+                            <div class="review-value" id="loan-monthlyEMI">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Total Interest</div>
+                            <div class="review-value" id="loan-totalInterest">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Total Payment</div>
+                            <div class="review-value" id="loan-totalPayment">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Existing Loans</div>
+                            <div class="review-value" id="loan-existingLoans">Loading...</div>
+                        </div>
+                        <div class="review-row">
+                            <div class="review-label">Collateral</div>
+                            <div class="review-value" id="loan-collateral">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- AI Approval Section -->
+                <div class="ai-approval-section">
+                    <div class="ai-icon">
+                        <i class="fas fa-robot pulse"></i>
+                    </div>
+                    <div class="ai-status">AI-Powered Instant Approval</div>
+                    <div class="ai-description">
+                        Our advanced AI system will analyze your application in real-time and provide instant preliminary approval based on RBI guidelines and banking norms.
+                    </div>
+    
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>AI Analysis Progress</span>
+                            <span id="progress-percent">0%</span>
+                        </div>
+                        <div class="progress-bar-ai">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                    </div>
+    
+                    <div class="ai-features">
+                        <div class="ai-feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>RBI Compliant</div>
+                        </div>
+                        <div class="ai-feature">
+                            <i class="fas fa-bolt"></i>
+                            <div>Instant Processing</div>
+                        </div>
+                        <div class="ai-feature">
+                            <i class="fas fa-chart-bar"></i>
+                            <div>Risk Assessment</div>
+                        </div>
+                        <div class="ai-feature">
+                            <i class="fas fa-lock"></i>
+                            <div>Secure & Encrypted</div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Terms and Conditions -->
+                <div class="terms-section">
+                    <div class="terms-header">
+                        <i class="fas fa-gavel"></i>
+                        <h3>Terms & Conditions</h3>
+                    </div>
+                    <div class="terms-content">
+                        <p>By submitting this application, you agree to the following terms and conditions:</p>
+                        <ol>
+                            <li>I confirm that all information provided is true and accurate to the best of my knowledge.</li>
+                            <li>I authorize KhukuBank India to verify the information provided through any means deemed necessary.</li>
+                            <li>I understand that this is a loan application and final approval is subject to the bank's discretion.</li>
+                            <li>I agree to the processing of my personal data in accordance with the bank's privacy policy.</li>
+                            <li>I understand that the interest rate and terms are subject to change based on final approval.</li>
+                            <li>I agree to provide any additional documents as requested by the bank during processing.</li>
+                            <li>I understand that any false information may lead to rejection of my application.</li>
+                        </ol>
+                        <p>All loan applications are processed as per RBI guidelines and banking regulations.</p>
+                    </div>
+    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                        <label for="agreeTerms">I have read and agree to the Terms & Conditions and Privacy Policy</label>
+                    </div>
+    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="agreeCommunication" name="agreeCommunication">
+                        <label for="agreeCommunication">I agree to receive communication regarding my application via SMS and email</label>
+                    </div>
+                </div>
+    
+                <!-- Success Message -->
+                <div id="success-message" class="success-message hidden">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Application Submitted Successfully!</h3>
+                    <p>Your loan application has been received and is being processed. Our AI system has provided preliminary approval.</p>
+                    <p><strong id="application-id">Application ID: Loading...</strong></p>
+                    <p>You will receive a confirmation email shortly with next steps.</p>
+                </div>
+    
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="back-to-loan"><b>Back to Loan Details</b></button>
+                    <button type="submit" class="btn btn-primary" id="submit-application">
+                        <i class="fas fa-paper-plane"></i> Submit Application
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>KhukuBank India</h3>
+                    <p>Your trusted banking partner with AI-powered service. RBI Registered.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Loan Products</h3>
+                    <ul>
+                        <li><a href="#">Home Loans</a></li>
+                        <li><a href="#">Personal Loans</a></li>
+                        <li><a href="#">Car Loans</a></li>
+                        <li><a href="#">Education Loans</a></li>
+                        <li><a href="#">Business Loans</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> Toll Free: 8436685689</li>
+                        <li><i class="fas fa-envelope"></i> Email: sudiptajana11111@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Head Office: Kazipara, Barasat</li>
+                        <li><i class="fas fa-id-card"></i> RBI Registration No: B-12345</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 KhukuBank India. All rights reserved. | Member of Indian Banks Association
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const submitBtn = document.getElementById('submit-application');
+            const progressFill = document.getElementById('progress-fill');
+            const progressPercent = document.getElementById('progress-percent');
+            const successMessage = document.getElementById('success-message');
+            const form = document.getElementById('review-submit-form');
+            const loading = document.getElementById('loading');
+        
+            // Fetch application data from Flask backend
+            fetch('/api/get-application-data')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        populateReviewData(data.data);
+                        loading.classList.add('hidden');
+                        form.classList.remove('hidden');
+                    } else {
+                        loading.innerHTML = `
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>Error loading application data: ${data.error}</p>
+                            <button onclick="window.location.href='/'" class="btn btn-primary">Go Home</button>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    loading.innerHTML = `
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Network error. Please check your connection.</p>
+                        <button onclick="location.reload()" class="btn btn-primary">Retry</button>
+                    `;
+                });
+        
+            // Function to populate review data
+            function populateReviewData(data) {
+                function updateField(section, field, value) {
+                    const element = document.getElementById(`${section}-${field}`);
+                    if (element) element.textContent = value || 'Not provided';
+                }
+        
+                function formatDate(dateString) {
+                    if (!dateString) return 'Not provided';
+                    try {
+                        const date = new Date(dateString);
+                        return date.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+                    } catch (e) {
+                        return dateString;
+                    }
+                }
+        
+                function formatCurrency(amount) {
+                    if (!amount || isNaN(amount)) return '₹0';
+                    return '₹' + parseFloat(amount).toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+                }
+        
+                function calculateTotalIncome(gross, additional) {
+                    return (parseFloat(gross) || 0) + (parseFloat(additional) || 0);
+                }
+        
+                // --- Personal Information ---
+                if (data.personal) {
+                    const personal = data.personal;
+                    updateField('personal', 'full_name', personal.full_name);
+                    updateField('personal', 'dob', formatDate(personal.dob));
+                    updateField('personal', 'email', personal.email);
+                    updateField('personal', 'phone', personal.phone);
+        
+                    const addressParts = [personal.city, personal.district, personal.state, personal.pin].filter(Boolean);
+                    updateField('personal', 'address', addressParts.join(', ') || 'Not provided');
+        
+                    const educationMap = { '1': 'Graduate', '0': 'Not Graduate', 'graduate': 'Graduate', 'not-graduate': 'Not Graduate' };
+                    updateField('personal', 'education', educationMap[personal.education] || personal.education);
+        
+                    const dependents = personal.dependents || '0';
+                    updateField('personal', 'dependents', `${dependents} ${dependents === '1' ? 'person' : 'people'}`);
+        
+                    updateField('personal', 'credit_score', personal.credit_score || 'Not provided');
+                }
+        
+                // --- Financial Information ---
+                if (data.financial) {
+                    const financial = data.financial;
+                    const employmentMap = {
+                        'salaried': 'Salaried', 'self-employed': 'Self-Employed', 'government': 'Government Employee',
+                        'retired': 'Retired', 'student': 'Student', 'unemployed': 'Unemployed'
+                    };
+                    updateField('financial', 'employmentStatus', employmentMap[financial.employmentStatus] || financial.employmentStatus);
+        
+                    const employer = financial.employerName || financial.businessName || 'Not provided';
+                    updateField('financial', 'employer', employer);
+        
+                    const grossIncome = financial.grossIncome;
+                    const additionalIncome = financial.additionalIncome;
+                    updateField('financial', 'grossIncome', formatCurrency(grossIncome));
+                    updateField('financial', 'additionalIncome', formatCurrency(additionalIncome));
+                    updateField('financial', 'totalIncome', formatCurrency(calculateTotalIncome(grossIncome, additionalIncome)));
+        
+                    updateField('financial', 'savingsBalance', formatCurrency(financial.savingsBalance));
+                    updateField('financial', 'fixedDeposits', formatCurrency(financial.fixedDeposits));
+                    updateField('financial', 'totalDebt', formatCurrency(financial.totalDebt));
+                }
+        
+                // --- Loan Details ---
+                if (data.loan) {
+                    const loan = data.loan;
+                    const loanTypeMap = {
+                        'home-loan': 'Home Loan', 'personal-loan': 'Personal Loan', 'car-loan': 'Car Loan',
+                        'education-loan': 'Education Loan', 'business-loan': 'Business Loan', 'gold-loan': 'Gold Loan',
+                        'agriculture-loan': 'Agriculture Loan', 'loan-against-property': 'Loan Against Property'
+                    };
+                    updateField('loan', 'loanType', loanTypeMap[loan.loanType] || loan.loanType);
+                    updateField('loan', 'loanAmount', formatCurrency(loan.loanAmount));
+                    updateField('loan', 'loanTerm', loan.loanTerm ? `${loan.loanTerm} Years` : 'Not provided');
+                    updateField('loan', 'interestRate', loan.interestRate ? `${loan.interestRate}% p.a.` : 'Not provided');
+        
+                    const purposeMap = {
+                        'purchase': 'Purchase of House/Flat', 'construction': 'Construction of House', 'extension': 'Home Extension/Renovation',
+                        'plot': 'Purchase of Plot', 'balance-transfer': 'Balance Transfer', 'wedding': 'Wedding Expenses',
+                        'medical': 'Medical Emergency', 'travel': 'Travel/Vacation', 'debt-consolidation': 'Debt Consolidation',
+                        'new-car': 'New Car Purchase', 'used-car': 'Used Car Purchase', 'undergraduate': 'Undergraduate Studies',
+                        'postgraduate': 'Postgraduate Studies', 'study-abroad': 'Study Abroad', 'working-capital': 'Working Capital',
+                        'expansion': 'Business Expansion'
+                    };
+                    updateField('loan', 'loanPurpose', purposeMap[loan.loanPurpose] || loan.loanPurpose);
+        
+                    updateField('loan', 'monthlyEMI', loan.monthlyEMI ? formatCurrency(loan.monthlyEMI) : 'Not calculated');
+                    updateField('loan', 'totalInterest', loan.totalInterest ? formatCurrency(loan.totalInterest) : 'Not calculated');
+                    updateField('loan', 'totalPayment', loan.totalPayment ? formatCurrency(loan.totalPayment) : 'Not calculated');
+        
+                    const existingLoansMap = {
+                        'no': 'No', 'yes-home': 'Yes, Home Loan', 'yes-personal': 'Yes, Personal Loan',
+                        'yes-car': 'Yes, Car Loan', 'yes-other': 'Yes, Other Loan'
+                    };
+                    updateField('loan', 'existingLoans', existingLoansMap[loan.existingLoans] || loan.existingLoans);
+        
+                    const collateralMap = { 'no': 'No', 'property': 'Property', 'gold': 'Gold', 'fixed-deposits': 'Fixed Deposits', 'shares': 'Shares/Securities' };
+                    updateField('loan', 'collateral', collateralMap[loan.collateral] || loan.collateral);
+                }
+            }
+        
+            // --- Edit button ---
+            window.editSection = function(section) {
+                const pages = { 'personal': '/apply', 'financial': '/financial', 'loan': '/loan' };
+                if (confirm(`Do you want to edit ${section} information?`)) window.location.href = pages[section];
+            };
+        
+            // --- Form Submission ---
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                console.log("📝 Form submit triggered");
+        
+                if (!document.getElementById('agreeTerms').checked) {
+                    alert('Please agree to the Terms & Conditions to proceed.');
+                    return;
+                }
+        
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                console.log("📤 Sending submission request to /api/submit-application");
+        
+                fetch('/api/submit-application', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log("📊 Response data:", data);
+                        if (data.success) simulateAIProcessing(data);
+                        else {
+                            console.error("❌ Server error:", data.error);
+                            alert(data.error || 'Failed to submit application');
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Application';
+                        }
+                    })
+                    .catch(err => {
+                        console.error('❌ Network error:', err);
+                        alert('Network error. Please try again.');
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Application';
+                    });
+            });
+        
+            // --- AI Processing Simulation ---
+            function simulateAIProcessing(data) {
+                console.log("🤖 AI Processing started");
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 2;
+                    progressFill.style.width = `${progress}%`;
+                    progressPercent.textContent = `${progress}%`;
+        
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            successMessage.classList.remove('hidden');
+                            const appId = data.prediction?.application_id || data.application_id || 'KBL' + new Date().getTime().toString().slice(-8);
+                            document.getElementById('application-id').textContent = `Application ID: ${appId}`;
+                            submitBtn.style.display = 'none';
+                            document.getElementById('back-to-loan').textContent = 'View Application Status';
+                            successMessage.scrollIntoView({ behavior: 'smooth' });
+                            setTimeout(() => window.location.href = '/result', 3000);
+                        }, 500);
+                    }
+                }, 50);
+            }
+        
+            // --- Back to Loan ---
+            document.getElementById("back-to-loan").addEventListener("click", function() {
+                window.location.href = '/loan';
+            });
+        });
+        </script>
+</body>
+</html>
